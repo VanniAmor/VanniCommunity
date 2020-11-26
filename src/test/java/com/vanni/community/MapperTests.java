@@ -1,9 +1,12 @@
 package com.vanni.community;
 
 import com.vanni.community.dao.DiscussPostMapper;
+import com.vanni.community.dao.LoginTicketMapper;
 import com.vanni.community.dao.UserMapper;
 import com.vanni.community.entity.DiscussPost;
+import com.vanni.community.entity.LoginTicket;
 import com.vanni.community.entity.User;
+import com.vanni.community.util.CommunityUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,9 @@ public class MapperTests {
     @Autowired
     private DiscussPostMapper discussPostMapper;
 
+    @Autowired
+    private LoginTicketMapper loginTicketMapper;
+
     @Test
     public void testSelectUser() {
         User user = userMapper.selectById(101);
@@ -40,9 +46,10 @@ public class MapperTests {
     @Test
     public void testInsertUser() {
         User user = new User();
-        user.setUsername("test");
-        user.setPassword("123456");
-        user.setSalt("abc");
+        user.setUsername("VanniAmor");
+        String password = CommunityUtil.md5("123456" + "Vanni123");
+        user.setPassword(password);
+        user.setSalt("Vanni123");
         user.setEmail("test@qq.com");
         user.setHeaderUrl("http://www.nowcoder.com/101.png");
         user.setCreateTime(new Date());
@@ -73,6 +80,25 @@ public class MapperTests {
 
         int rows = discussPostMapper.selectDiscussPostRows(0);
         System.out.println(rows);
+    }
+
+    @Test
+    public void testInsertLoginTicket() {
+        LoginTicket loginTicket = new LoginTicket();
+        loginTicket.setStatus(0);
+        loginTicket.setTicket("asdasdf");
+        loginTicket.setUserId(101);
+        loginTicket.setExpired(new Date(System.currentTimeMillis() + 1000 * 60));
+
+        loginTicketMapper.insertLoginTicket(loginTicket);
+    }
+
+    @Test
+    public void testSelectLoginTicket() {
+        LoginTicket loginTicket = loginTicketMapper.selectByTicket("asdasdf");
+        System.out.println(loginTicket);
+
+        loginTicketMapper.updateTicketStatus("asdasdf", 1);
 
     }
 }
