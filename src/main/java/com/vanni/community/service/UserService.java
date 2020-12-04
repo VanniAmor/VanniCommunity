@@ -1,6 +1,5 @@
 package com.vanni.community.service;
 
-import com.mysql.cj.log.Log;
 import com.vanni.community.dao.LoginTicketMapper;
 import com.vanni.community.dao.UserMapper;
 import com.vanni.community.entity.LoginTicket;
