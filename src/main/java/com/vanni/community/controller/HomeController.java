@@ -48,11 +48,8 @@ public class HomeController {
         return "/index";
     }
 
-    @RequestMapping(path = "/vanni", method = RequestMethod.GET)
-    @ResponseBody
-    public String getVanni()
-    {
-        System.out.println("asdfasdf");
-        return "asdfasdf";
+    @RequestMapping(path = "/error", method = RequestMethod.GET)
+    public String getErrorPage() {
+        return "/error/500";
     }
 }
