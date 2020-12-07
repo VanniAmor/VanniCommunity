@@ -20,6 +20,7 @@ public class ServiceLogAspect {
 
     private Logger logger = LoggerFactory.getLogger(ServiceLogAspect.class);
 
+    // 织入点为service包下的所有操作
     @Pointcut("execution(* com.vanni.community.service.*.*(..))")
     public void pointcut() {
 
