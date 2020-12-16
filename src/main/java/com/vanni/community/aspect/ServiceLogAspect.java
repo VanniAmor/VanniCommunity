@@ -31,6 +31,9 @@ public class ServiceLogAspect {
         // 记录用户操作
         // 获取用户IP
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if(attributes == null) {
+            return;
+        }
         HttpServletRequest request = attributes.getRequest();
         String ip = request.getRemoteHost();
         // 获取时间
